@@ -1,52 +1,20 @@
-import ShopCard from './components/ShopCard'
-import ShopForm from './components/ShopForm'
-import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [ownerName, setOwnerName] = useState("")
-const [shopType, setShopType] = useState("")
-const [floorNumber, setFloorNumber] = useState("")
-const [shops, setShops] = useState([])
-
-useEffect(() => {
-  console.log("Shop list updated")
-}, [shops])
-
-const addShop = () => {
-
-  if(ownerName === "" || shopType === "" || floorNumber === ""){
-    alert("Please fill all fields")
-    return
-  }
-  const newShop = {
-    ownerName,
-    shopType,
-    floorNumber
-  }
-  setShops([...shops, newShop])
-
-  setOwnerName("")
-  setShopType("")
-  setFloorNumber("")
-}
-const deleteShop = (index) => {
-
-  const updatedShops = shops.filter(
-    (_, i) => i !== index
-  )
-
-  setShops(updatedShops)
-}
   return (
     <>
+
       {/* Navbar */}
       <header>
+
         <nav className="navbar">
+
           <div className="logo">
             Smart Mall Hub
           </div>
+
           <ul className="nav-links">
+
             <li>
               <a href="#home">Home</a>
             </li>
@@ -66,8 +34,11 @@ const deleteShop = (index) => {
             <li>
               <a href="#contact">Contact</a>
             </li>
+
           </ul>
+
           <div className="auth-buttons">
+
             <a href="#" className="btn btn-light">
               Sign In
             </a>
@@ -81,6 +52,7 @@ const deleteShop = (index) => {
         </nav>
 
       </header>
+
 
       {/* Hero Section */}
       <section className="hero" id="home">
@@ -108,7 +80,10 @@ const deleteShop = (index) => {
             </a>
 
           </div>
+
         </div>
+
+
         <div className="hero-image">
 
           <img
@@ -119,6 +94,7 @@ const deleteShop = (index) => {
         </div>
 
       </section>
+
 
       {/* About */}
       <section className="about" id="about">
@@ -145,6 +121,7 @@ const deleteShop = (index) => {
 
       </section>
 
+
       {/* Features */}
       <section className="features" id="features">
 
@@ -153,6 +130,8 @@ const deleteShop = (index) => {
         </h2>
 
         <div className="feature-container">
+
+
           <div className="feature-card">
 
             <h3>
@@ -198,6 +177,7 @@ const deleteShop = (index) => {
 
           </div>
 
+
           <div className="feature-card">
 
             <h3>
@@ -209,6 +189,7 @@ const deleteShop = (index) => {
             </p>
 
           </div>
+
 
           <div className="feature-card">
 
@@ -226,6 +207,7 @@ const deleteShop = (index) => {
 
       </section>
 
+
       {/* Dashboard */}
       <section className="dashboard" id="dashboard">
 
@@ -234,6 +216,7 @@ const deleteShop = (index) => {
         </h2>
 
         <div className="dashboard-container">
+
 
           <div className="dashboard-card">
 
@@ -247,6 +230,7 @@ const deleteShop = (index) => {
 
           </div>
 
+
           <div className="dashboard-card">
 
             <h3>
@@ -259,6 +243,7 @@ const deleteShop = (index) => {
 
           </div>
 
+
           <div className="dashboard-card">
 
             <h3>
@@ -270,6 +255,7 @@ const deleteShop = (index) => {
             </p>
 
           </div>
+
 
           <div className="dashboard-card">
 
@@ -286,41 +272,8 @@ const deleteShop = (index) => {
         </div>
 
       </section>
-      {/* Shop Registration */}
-<section className="shop-registration">
 
-  <h2 className="section-title">
-    Shop Registration
-  </h2>
 
-  <ShopForm
-  ownerName={ownerName}
-  setOwnerName={setOwnerName}
-  shopType={shopType}
-  setShopType={setShopType}
-  floorNumber={floorNumber}
-  setFloorNumber={setFloorNumber}
-  addShop={addShop}
-/>
-
-<div className="shop-list">
-
-  {
-    shops.map((shop, index) => (
-
-      <ShopCard
-  key={index}
-  shop={shop}
-  index={index}
-  deleteShop={deleteShop}
-/>
-    ))
-  }
-
-</div>
-
-</section>
-      
       {/* Contact */}
       <section className="contact" id="contact">
 
@@ -356,6 +309,7 @@ const deleteShop = (index) => {
 
       </section>
 
+
       {/* Footer */}
       <footer>
 
@@ -370,3 +324,4 @@ const deleteShop = (index) => {
 }
 
 export default App
+
