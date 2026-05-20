@@ -297,7 +297,6 @@ function App() {
             rows="5"
             placeholder="Enter Your Message"
           ></textarea>
-
           <button
             type="submit"
             className="btn"
@@ -306,7 +305,6 @@ function App() {
           </button>
 
         </form>
-
       </section>
 
 
