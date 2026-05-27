@@ -5,7 +5,8 @@ import axios from "axios"
 
 function Dashboard() {
 
-  const [ownerName, setOwnerName] = useState("")
+  const [shopOwnerName, setShopOwnerName] = useState("")
+  const [shopName, setShopName] = useState("")
   const [shopType, setShopType] = useState("")
   const [floorNumber, setFloorNumber] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
@@ -22,8 +23,8 @@ function Dashboard() {
     try {
 
       const res = await axios.get(
-        "http://localhost:3000/api/shops"
-      )
+  `http://localhost:3000/api/shops?email=${localStorage.getItem("email")}`
+)
 
       setShops(res.data)
 
@@ -38,7 +39,8 @@ function Dashboard() {
   const addShop = async () => {
 
     if (
-      ownerName === "" ||
+      shopOwnerName === "" ||
+        shopName === "" ||
       shopType === "" ||
       floorNumber === "" ||
       phoneNumber === "" ||
@@ -53,8 +55,9 @@ function Dashboard() {
     try {
 
       const newShop = {
-        ownerName,
-        shopName: ownerName,
+        shopOwnerName,
+        ownerEmail:localStorage.getItem("email"),
+        shopName,
         shopType,
         floorNumber,
         phoneNumber,
@@ -83,7 +86,8 @@ function Dashboard() {
 
       fetchShops()
 
-      setOwnerName("")
+      setShopOwnerName("")
+      setShopName("")
       setShopType("")
       setFloorNumber("")
       setPhoneNumber("")
@@ -117,7 +121,8 @@ function Dashboard() {
 
   const editShop = (shop) => {
 
-    setOwnerName(shop.ownerName)
+    setShopOwnerName(shop.shopOwnerName)
+    setShopName(shop.shopName)
     setShopType(shop.shopType)
     setFloorNumber(shop.floorNumber)
     setPhoneNumber(shop.phoneNumber)
@@ -190,14 +195,15 @@ function Dashboard() {
       </div>
 
       <h1>
-        <br/>
-        <br/>
+        <br/><br/>
         Shop Registration 
       </h1>
 
       <ShopForm
-        ownerName={ownerName}
-        setOwnerName={setOwnerName}
+        shopOwnerName={shopOwnerName}
+        setShopOwnerName={setShopOwnerName}
+        shopName={shopName}
+setShopName={setShopName}
         shopType={shopType}
         setShopType={setShopType}
         floorNumber={floorNumber}
@@ -208,7 +214,7 @@ function Dashboard() {
         setCctvStatus={setCctvStatus}
         addShop={addShop}
       />
-      <br/><br/><br/><br/><br/>
+     <br/><br/><br/><br/><br/>
     <h2 className="section-title">Shop Control Centre</h2>
       <div className="shop-list">
 

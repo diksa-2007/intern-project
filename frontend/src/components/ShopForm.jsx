@@ -1,7 +1,9 @@
 function ShopForm({
 
-  ownerName,
-  setOwnerName,
+  shopOwnerName,
+  setShopOwnerName,
+  shopName,
+setShopName,
   shopType,
   setShopType,
   floorNumber,
@@ -20,10 +22,16 @@ function ShopForm({
 
       <input
         type="text"
-        placeholder="Enter Owner Name"
-        value={ownerName}
-        onChange={(e) => setOwnerName(e.target.value)}
+        placeholder="Enter Shop Owner Name"
+        value={shopOwnerName}
+        onChange={(e) => setShopOwnerName(e.target.value)}
       />
+      <input
+  type="text"
+  placeholder="Enter Shop Name"
+  value={shopName}
+  onChange={(e) => setShopName(e.target.value)}
+/>
 
       <input
         type="text"

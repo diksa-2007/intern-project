@@ -1,7 +1,7 @@
 function ShopCard({ shop, index, deleteShop, editShop }) {
   return (
     <div className="shop-card">
-      <h3>{shop.ownerName}</h3>
+      <h3>{shop.shopOwnerName}</h3>
       <p>Shop Type : {shop.shopType}</p>
       <p>Floor Number : {shop.floorNumber}</p>
       <p>Phone Number : {shop.phoneNumber}</p>

@@ -2,104 +2,29 @@ import Signin from "./components/Signin"
 import Signup from "./components/Signup"
 import Dashboard from "./components/Dashboard";
 import axios from "axios"
-import ShopCard from './components/ShopCard'
-import ShopForm from './components/ShopForm'
 import { useState, useEffect } from 'react'
 import './App.css'
 
 
 function App() {
   const [page, setPage] = useState("home")
-  const [editId, setEditId] = useState(null)
-  const [ownerName, setOwnerName] = useState("")
-const [shopType, setShopType] = useState("")
-const [floorNumber, setFloorNumber] = useState("")
-const [phoneNumber, setPhoneNumber] = useState("")
-const [cctvStatus, setCctvStatus] = useState("")
-const [shops, setShops] = useState([])
+const [totalOwners, setTotalOwners] = useState(0)
+const [totalShops, setTotalShops] = useState(0)
+const [name, setName] = useState("")
+const [email, setEmail] = useState("")
+const [message, setMessage] = useState("")
 const token = localStorage.getItem("token")
 
-
-useEffect(() => {
-  fetchShops()
-}, [])
-
-const fetchShops = async () => {
+const fetchDashboardStats = async () => {
 
   try {
 
     const res = await axios.get(
-      "http://localhost:3000/api/shops"
+      "http://localhost:3000/api/dashboard"
     )
 
-const filteredShops = res.data.filter(
-  (shop) =>
-    shop.ownerEmail === localStorage.getItem("email")
-)
-
-setShops(filteredShops)
-  } catch (error) {
-
-    console.log(error)
-
-  }
-
-}
-if(token){
-  return <Dashboard />
-}
-const addShop = async () => {
-
-  if(
-  ownerName === "" ||
-  shopType === "" ||
-  floorNumber === "" ||
-  phoneNumber === "" ||
-  cctvStatus === ""
-){
-    alert("Please fill all fields")
-    return
-  }
-
-  try {
-
-    const newShop = {
-  ownerName,
-  ownerEmail: localStorage.getItem("email"),
-  shopName: ownerName,
-  shopType,
-  floorNumber,
-  phoneNumber,
-  cctvStatus,
-  rentStatus: "Paid",
-  buildingSystem: "Active"
-}
-
-    if(editId){
-
-  await axios.put(
-    `http://localhost:3000/api/shops/${editId}`,
-    newShop
-  )
-
-  setEditId(null)
-
-}else{
-
-  await axios.post(
-    "http://localhost:3000/api/shops",
-    newShop
-  )
-
-}
-
-    fetchShops()
-
-    setOwnerName("")
-    setShopType("")
-    setFloorNumber("")
-    setPhoneNumber("")
-setCctvStatus("")
+    setTotalOwners(res.data.totalOwners)
+    setTotalShops(res.data.totalShops)
 
   } catch (error) {
 
@@ -108,34 +33,10 @@ setCctvStatus("")
   }
 
 }
-const deleteShop = async (id) => {
 
-  try {
-
-    await axios.delete(
-      `http://localhost:3000/api/shops/${id}`
-    )
-
-    fetchShops()
-
-  } catch (error) {
-
-    console.log(error)
-
-  }
-
-}
-const editShop = (shop) => {
-
-  setOwnerName(shop.ownerName)
-  setShopType(shop.shopType)
-  setFloorNumber(shop.floorNumber)
-  setPhoneNumber(shop.phoneNumber)
-  setCctvStatus(shop.cctvStatus)
-
-  setEditId(shop._id)
-
-}
+useEffect(() => {
+    fetchDashboardStats()
+}, [])
 if(token)
 {
   return <Dashboard />
@@ -147,7 +48,36 @@ if(page === "signin"){
 if(page === "signup"){
   return <Signup setPage={setPage} />
 }
-  return (
+
+const handleContact = async (e) => {
+
+  e.preventDefault()
+
+  try {
+
+    await axios.post(
+      "http://localhost:3000/api/contact",
+      {
+        name,
+        email,
+        message,
+      }
+    )
+
+    alert("Message Sent Successfully")
+
+    setName("")
+    setEmail("")
+    setMessage("")
+
+  } catch (error) {
+
+    console.log(error)
+
+  }
+
+}  
+return (
     <>
       {/* Navbar */}
       <header>
@@ -353,7 +283,7 @@ if(page === "signup"){
           <div className="dashboard-card">
 
             <h3>
-              500+
+              {totalOwners}
             </h3>
 
             <p>
@@ -365,7 +295,7 @@ if(page === "signup"){
           <div className="dashboard-card">
 
             <h3>
-              1200+
+              {totalShops}
             </h3>
 
             <p>
@@ -409,22 +339,28 @@ if(page === "signup"){
           Contact Us
         </h2>
 
-        <form className="contact-form">
+        <form className="contact-form" onSubmit={handleContact}>
 
           <input
-            type="text"
-            placeholder="Enter Your Name"
-          />
+  type="text"
+  placeholder="Enter Your Name"
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+/>
 
           <input
-            type="email"
-            placeholder="Enter Your Email"
-          />
+  type="email"
+  placeholder="Enter Your Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
 
           <textarea
-            rows="5"
-            placeholder="Enter Your Message"
-          ></textarea>
+  rows="5"
+  placeholder="Enter Your Message"
+  value={message}
+  onChange={(e) => setMessage(e.target.value)}
+></textarea>
 
           <button
             type="submit"
