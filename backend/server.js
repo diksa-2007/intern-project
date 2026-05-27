@@ -1,3 +1,5 @@
+const dashboardRoutes = require("./routes/dashboardRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 require("dotenv").config()
 const authRoutes = require("./routes/authRoutes");
 const express = require("express");
@@ -19,7 +21,8 @@ app.use(express.json());
 
 app.use("/api/shops", shopRoutes);
 app.use("/api/auth", authRoutes);
-
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/contact", contactRoutes);
 app.get("/", (req, res) => {
   res.send("Smart Mall Hub Backend Running");
 });

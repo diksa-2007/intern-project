@@ -2,11 +2,15 @@ const mongoose = require("mongoose");
 
 const shopSchema = new mongoose.Schema({
 
-  ownerName: {
-    type: String,
-    required: true,
-  },
+ shopOwnerName: {
+  type: String,
+  required: true,
+},
 
+ownerEmail: {
+  type: String,
+  required: true,
+},
   shopName: {
     type: String,
     required: true,

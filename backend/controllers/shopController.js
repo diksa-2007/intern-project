@@ -7,35 +7,42 @@ const createShop = async (req, res, next) => {
   try {
 
     const {
-      ownerName,
-      shopName,
-      shopType,
-      floorNumber,
-      rentStatus,
-      buildingSystem,
-    } = req.body;
+  shopOwnerName,
+  ownerEmail,
+  shopName,
+  shopType,
+  floorNumber,
+  phoneNumber,
+  cctvStatus,
+  rentStatus,
+  buildingSystem,
+} = req.body;
 
     if (
-      !ownerName ||
-      !shopName ||
-      !shopType ||
-      !floorNumber ||
-      !rentStatus ||
-      !buildingSystem
-    ) {
+  !shopOwnerName ||
+  !ownerEmail ||
+  !shopName ||
+  !shopType ||
+  !floorNumber ||
+  !rentStatus ||
+  !buildingSystem
+) {
       return res.status(400).json({
         message: "All fields are required",
       });
     }
 
     const shop = await Shop.create({
-      ownerName,
-      shopName,
-      shopType,
-      floorNumber,
-      rentStatus,
-      buildingSystem,
-    });
+  shopOwnerName,
+  ownerEmail,
+  shopName,
+  shopType,
+  floorNumber,
+  phoneNumber,
+  cctvStatus,
+  rentStatus,
+  buildingSystem,
+});
 
     res.status(201).json(shop);
 
@@ -50,7 +57,11 @@ const getShops = async (req, res, next) => {
 
   try {
 
-    const shops = await Shop.find();
+    const ownerEmail = req.query.email;
+
+const shops = await Shop.find({
+  ownerEmail: ownerEmail,
+});
 
     res.json(shops);
 
