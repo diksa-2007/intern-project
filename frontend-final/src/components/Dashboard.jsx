@@ -23,7 +23,7 @@ function Dashboard() {
     try {
 
       const res = await axios.get(
-  `http://localhost:3000/api/shops?email=${localStorage.getItem("email")}`
+  `https://intern-project-ckz7.onrender.com/api/shops?email=${localStorage.getItem("email")}`
 )
 
       setShops(res.data)
@@ -69,7 +69,7 @@ function Dashboard() {
       if (editId) {
 
         await axios.put(
-          `http://localhost:3000/api/shops/${editId}`,
+          `https://intern-project-ckz7.onrender.com/api/shops/${editId}`,
           newShop
         )
 
@@ -78,7 +78,7 @@ function Dashboard() {
       } else {
 
         await axios.post(
-          "http://localhost:3000/api/shops",
+          "https://intern-project-ckz7.onrender.com/api/shops",
           newShop
         )
 
@@ -106,7 +106,7 @@ function Dashboard() {
     try {
 
       await axios.delete(
-        `http://localhost:3000/api/shops/${id}`
+        `https://intern-project-ckz7.onrender.com/api/shops/${id}`
       )
 
       fetchShops()

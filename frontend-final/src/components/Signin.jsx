@@ -16,7 +16,7 @@ function Signin() {
     try {
 
       const res = await axios.post(
-        "http://localhost:3000/api/auth/signin",
+        "https://intern-project-ckz7.onrender.com/api/auth/signin",
         {
           email,
           password

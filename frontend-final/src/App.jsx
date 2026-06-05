@@ -20,7 +20,7 @@ const fetchDashboardStats = async () => {
   try {
 
     const res = await axios.get(
-      "http://localhost:3000/api/dashboard"
+      "https://intern-project-ckz7.onrender.com/api/dashboard"
     )
 
     setTotalOwners(res.data.totalOwners)
@@ -56,7 +56,7 @@ const handleContact = async (e) => {
   try {
 
     await axios.post(
-      "http://localhost:3000/api/contact",
+      "https://intern-project-ckz7.onrender.com/api/contact",
       {
         name,
         email,

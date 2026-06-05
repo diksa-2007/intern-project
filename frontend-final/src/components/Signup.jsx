@@ -17,7 +17,7 @@ function Signup() {
     try {
 
       await axios.post(
-        "http://localhost:3000/api/auth/signup",
+        "https://intern-project-ckz7.onrender.com/api/auth/signup",
         {
           name,
           email,
